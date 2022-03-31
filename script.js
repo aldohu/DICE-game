@@ -9,7 +9,7 @@ GAME RULES :
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */ 
-var scores,roundScore, activePlayer,gamePlaying;
+var scores,roundScore, activePlayer,gamePlaying,previosRoll, previosPlayer;
 
 init();
 
@@ -24,16 +24,27 @@ init();
 document.querySelector(".btn--roll").addEventListener("click",function(){
    if(gamePlaying) {
     //1. Random number
-    var dice = (Math.floor(Math.random() * 6)) + 1;
-
+    
+    var dice = 6//(Math.floor(Math.random() * 6)) + 1;
+    
+    //1.1 save previous roll
+    
     //2. Display the result
     var diceDOM =document.querySelector(".dice");
     diceDOM.style.display = "block";
     diceDOM.src = "dice-" + dice + ".png"
 
     //3. Update the round if the rolled number was not a 1
-
-    if(dice !== 1) {
+    
+    if(dice === 6 && previosRoll === 6 ){
+        roundScore = 0;
+        dice = 0;
+        document.querySelector("#score--" + activePlayer).textContent = "0";
+        
+        nextPlayer();
+        
+    }
+   else if(dice !== 1) {
         //add score
         roundScore += dice;
         document.querySelector("#current--" + activePlayer).textContent = roundScore;
@@ -41,6 +52,8 @@ document.querySelector(".btn--roll").addEventListener("click",function(){
         //Next player
         nextPlayer();
     }
+    previosRoll = dice;
+    
 }})
 
 document.querySelector(".btn--hold").addEventListener("click", function(){
@@ -74,6 +87,7 @@ function nextPlayer(){
 
         document.querySelector(".dice").style.display = "none";
         roundScore = 0;
+        previosRoll = 0;
 }
 
 document.querySelector(".btn--new").addEventListener("click", init)
@@ -103,6 +117,6 @@ function init() {
 3 challenges
 
 1. A player looses hit ENTIRE score when he rolls number 6 two times in row.
-After that it is next player's turn;
+After that it is next player's turn; DONE
 2. Add an input field to the HTML where players can set the winning score, so that they can change the predefined socre of 100.
-3. Add another dice to the game so that there are two dices now. The player looses his current score when one of them is a 1.
+3. Add another dice to the game so that there are two dices */
