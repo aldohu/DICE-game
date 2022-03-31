@@ -25,8 +25,14 @@
           <p class="current-score" id="current--1">0</p>
         </div>
       </section>
-
-      <img src="dice-5.png" alt="Playing dice" class="dice" />
+      <div class="dices">
+        <img src="dice-5.png" alt="Playing dice" class="dice--0" />
+        <img src="dice-5.png" alt="Playing dice" class="dice--1" />
+      </div>
+      <label for="max-score"
+        >Max score
+        <input type="text" name="max-score" id="max-score" />
+      </label>
       <button class="btn btn--new">🔄 New game</button>
       <button class="btn btn--roll">🎲 Roll dice</button>
       <button class="btn btn--hold">📥 Hold</button>

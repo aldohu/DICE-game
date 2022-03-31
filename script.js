@@ -9,7 +9,7 @@ GAME RULES :
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */ 
-var scores,roundScore, activePlayer,gamePlaying,previosRoll, previosPlayer;
+var scores,roundScore, activePlayer,gamePlaying,previosRoll, previosPlayer, endScore;
 
 init();
 
@@ -25,14 +25,18 @@ document.querySelector(".btn--roll").addEventListener("click",function(){
    if(gamePlaying) {
     //1. Random number
     
-    var dice = 6//(Math.floor(Math.random() * 6)) + 1;
+    var dice0 = (Math.floor(Math.random() * 6)) + 1;
+    var dice1 = (Math.floor(Math.random() * 6)) + 1;
     
     //1.1 save previous roll
     
     //2. Display the result
-    var diceDOM =document.querySelector(".dice");
-    diceDOM.style.display = "block";
-    diceDOM.src = "dice-" + dice + ".png"
+    var diceDOM0 =document.querySelector(".dice--0");
+    var diceDOM1 =document.querySelector(".dice--1");
+    diceDOM0.style.display = "block";
+    diceDOM1.style.display = "block";
+    diceDOM0.src = "dice-" + dice0 + ".png"
+    diceDOM1.src = "dice-" + dice1 + ".png"
 
     //3. Update the round if the rolled number was not a 1
     
@@ -63,7 +67,7 @@ document.querySelector(".btn--hold").addEventListener("click", function(){
     //2. update the UI 
     document.querySelector("#score--" + activePlayer).textContent = scores[activePlayer]
     //3. CHekc if player won the game
-    if(scores[activePlayer] >= 20){
+    if(scores[activePlayer] >= endScore){
         //change ui to player won
         document.querySelector("#name--" + activePlayer).textContent ="Winner"
         document.querySelector(".player--" + activePlayer).classList.add("player--winner");
@@ -85,7 +89,8 @@ function nextPlayer(){
         document.querySelector(".player--0").classList.toggle("player--active");
         document.querySelector(".player--1").classList.toggle("player--active");
 
-        document.querySelector(".dice").style.display = "none";
+        document.querySelector(".dice--0").style.display = "none";
+        document.querySelector(".dice--1").style.display = "none";
         roundScore = 0;
         previosRoll = 0;
 }
@@ -99,8 +104,10 @@ function init() {
     scores = [0,0];
     roundScore = 0;
     activePlayer = 0;
+    endScore = 100;
     gamePlaying = true;
-    document.querySelector(".dice").style.display = "none";
+    document.querySelector(".dice--0").style.display = "none";
+    document.querySelector(".dice--1").style.display = "none";
     document.getElementById("score--0").textContent = "0";
     document.getElementById("score--1").textContent = "0";
     document.getElementById("current--0").textContent = "0";
@@ -113,10 +120,15 @@ function init() {
     document.querySelector(".player--0").classList.add("player--active")
 }
 
+document.getElementById("max-score").addEventListener("change",function(){
+    endScore = Number(document.getElementById("max-score").value)
+})
+
 /*
 3 challenges
 
 1. A player looses hit ENTIRE score when he rolls number 6 two times in row.
 After that it is next player's turn; DONE
-2. Add an input field to the HTML where players can set the winning score, so that they can change the predefined socre of 100.
+2. Add an input field to the HTML where players can set the winning score,
+ so that they can change the predefined socre of 100. DONE
 3. Add another dice to the game so that there are two dices */

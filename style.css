@@ -149,12 +149,7 @@ main {
 }
 
 .dice {
-  position: absolute;
-  left: 50%;
-  top: 16.5rem;
-  transform: translateX(-50%);
-  height: 10rem;
-  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+ 
 }
 
 .player--winner {
@@ -164,4 +159,41 @@ main {
 .player--winner .name {
   font-weight: 700;
   color: #c7365f;
+}
+
+label {
+  text-align: center;
+  background-color: aqua;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 40%;
+  font-size: 1.8rem;
+  top: 90%;
+  text-transform: uppercase;
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  padding: 0.7rem 2.5rem;
+  font-weight: 400;
+  color: #444;
+  transition: all 0.2s;
+  padding: 0.7rem 2.5rem;
+  border-radius: 50rem;
+  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.dices{
+  position: absolute;
+  left: 50%;
+  top: 16.5rem;
+  transform: translateX(-50%);
+  height: 6em;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+}
+
+.dice--0,.dice--1 {
+  height: 6rem;
 }
